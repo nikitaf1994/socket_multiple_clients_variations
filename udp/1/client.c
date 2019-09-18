@@ -25,7 +25,7 @@ int main()
 	}
 
     	addr.sin_family = AF_INET;
-    	addr.sin_port = htons(3445);
+    	addr.sin_port = htons(3447);
     	addr.sin_addr.s_addr = INADDR_ANY;
 
 	while(1)

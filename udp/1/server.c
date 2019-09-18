@@ -14,6 +14,7 @@ int main()
     	char buf[1024];
     	int bytes_read;
 	int len;
+	pid_t childpid;
 
     	sock = socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -24,14 +25,16 @@ int main()
     	}
 
 	addr.sin_family = AF_INET;
-    	addr.sin_port = htons(3445);
+    	addr.sin_port = htons(3447);
     	addr.sin_addr.s_addr = INADDR_ANY;
 
+		
     	if(bind(sock, (const struct sockaddr *) &addr, sizeof(addr)) < 0 )
     	{
         	perror("bind");
         	exit(2);
     	}
+
 	while(1)
 	{
 	bytes_read=recvfrom(sock, (char *)buf, 1024, MSG_WAITALL, (struct sockaddr *) &cliaddr, &len);
@@ -39,5 +42,6 @@ int main()
 	printf("%s\n",buf);
 	sendto(sock, (const char *)msg, strlen(msg), MSG_CONFIRM, (const struct sockaddr *) &cliaddr, len);
 	}
+
     	return 0;
 }
